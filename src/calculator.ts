@@ -1,6 +1,9 @@
+import { times } from "lodash-es"
+
 type YearPlan = {
   monthlySavings: number,
-  interestRate: number
+  interestRate: number,
+  year: number
 }
 
 type YearResult = YearPlan & {
@@ -20,9 +23,12 @@ type LifeResult = LifePlan & {
   yearResults: YearResult[]
 }
 
-function lifePlan(lifePlan: LifePlan): LifeResult {
+function createLifePlan(lifePlan: LifePlan): LifeResult {
   const { initialAmount, monthlySavings, interestRate, years } = lifePlan
-  const yearPlans = Array<YearPlan>(years).fill({ monthlySavings, interestRate })
+  const startYear = new Date().getFullYear() + 1 // next year
+  const yearPlans = times(years, (y) => {
+    return { monthlySavings, interestRate, year: startYear + y }
+  })
 
   let amount = initialAmount
   const yearResults = yearPlans.map(yearPlan => {
@@ -45,4 +51,5 @@ function lifePlan(lifePlan: LifePlan): LifeResult {
   }
 }
 
-export { lifePlan }
+export { createLifePlan }
+export type { LifeResult }

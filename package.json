@@ -22,9 +22,11 @@
   "homepage": "https://github.com/reid-rigo/hunter-financial-planning#readme",
   "dependencies": {
     "chart.js": "^4.2.1",
+    "lodash-es": "^4.17.21",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.7",
     "esbuild": "^0.17.15",
     "ts-node": "^10.9.1"
   }
