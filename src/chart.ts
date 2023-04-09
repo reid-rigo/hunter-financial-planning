@@ -1,16 +1,16 @@
 import Chart from "chart.js/auto"
-import type { LifeResult } from "./calculator"
+import type { CalculatedLifePlan } from "./calculator"
 
-function chartLifePlan(canvas: HTMLCanvasElement, lifeResult: LifeResult): Chart {
-  const { initialAmount, monthlyContribution: monthlySavings, yearResults } = lifeResult
+function chartLifePlan(canvas: HTMLCanvasElement, lifeResult: CalculatedLifePlan): Chart {
+  const { initialAmount, monthlyContribution: monthlySavings, calculatedYearPlans } = lifeResult
 
-  const contributionYears = yearResults.map((yearResult, i) => initialAmount + (monthlySavings * 12 * i))
-  const investmentYears = yearResults.map(yearResult => yearResult.initialAmount)
+  const contributionYears = calculatedYearPlans.map((_, i) => initialAmount + (monthlySavings * 12 * i))
+  const investmentYears = calculatedYearPlans.map(calculatedYearPlan => calculatedYearPlan.initialAmount)
 
   return new Chart(canvas, {
     type: "line",
     data: {
-      labels: yearResults.map(yearResult => yearResult.year),
+      labels: calculatedYearPlans.map(calculatedYearPlan => calculatedYearPlan.year),
       datasets: [{
         label: "Contributions",
         data: contributionYears,
@@ -43,3 +43,4 @@ function chartLifePlan(canvas: HTMLCanvasElement, lifeResult: LifeResult): Chart
 }
 
 export { chartLifePlan }
+export type { Chart }

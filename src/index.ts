@@ -1,15 +1,13 @@
-import { createLifePlan } from "./calculator"
-import { chartLifePlan } from "./chart"
+import { calculateLifePlan } from "./calculator"
+import { chartLifePlan, Chart } from "./chart"
+import { onLifePlanSubmit } from "./form"
 
-export { createLifePlan, chartLifePlan }
-
-const lifePlan = createLifePlan({
-  initialAmount: 20000,
-  monthlyContribution: 2000,
-  interestRate: 6.0,
-  startYear: 2024,
-  years: 20
-})
-
+const form = <HTMLFormElement>document.querySelector("form")
 const canvas = <HTMLCanvasElement>document.querySelector("canvas#chart")
-chartLifePlan(canvas, lifePlan)
+let currentChart: Chart
+
+onLifePlanSubmit(form, lifePlan => {
+  const calculatedLifePlan = calculateLifePlan(lifePlan)
+  currentChart?.destroy()
+  currentChart = chartLifePlan(canvas, calculatedLifePlan)
+})

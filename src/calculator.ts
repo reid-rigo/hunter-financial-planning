@@ -1,12 +1,12 @@
 import { times } from "lodash-es"
 
 type YearPlan = {
-  monthlySavings: number,
-  interestRate: number,
+  monthlyContribution: number,
+  growthRate: number,
   year: number
 }
 
-type YearResult = YearPlan & {
+type CalculatedYearPlan = YearPlan & {
   initialAmount: number,
   finalAmount: number
 }
@@ -14,27 +14,27 @@ type YearResult = YearPlan & {
 type LifePlan = {
   initialAmount: number,
   monthlyContribution: number,
-  interestRate: number,
+  growthRate: number,
   startYear: number,
   years: number,
 }
 
-type LifeResult = LifePlan & {
+type CalculatedLifePlan = LifePlan & {
   finalAmount: number,
-  yearResults: YearResult[]
+  calculatedYearPlans: CalculatedYearPlan[]
 }
 
-function createLifePlan(lifePlan: LifePlan): LifeResult {
-  const { initialAmount, monthlyContribution: monthlySavings, interestRate, startYear, years } = lifePlan
+function calculateLifePlan(lifePlan: LifePlan): CalculatedLifePlan {
+  const { initialAmount, monthlyContribution, growthRate, startYear, years } = lifePlan
   const yearPlans = times(years + 1, y => {
-    return { monthlySavings, interestRate, year: startYear + y }
+    return { monthlyContribution, growthRate, year: startYear + y }
   })
 
   let amount = initialAmount
-  const yearResults = yearPlans.map(yearPlan => {
-    const { monthlySavings, interestRate } = yearPlan
+  const calculatedYearPlans = yearPlans.map(yearPlan => {
+    const { monthlyContribution, growthRate } = yearPlan
     const initialAmount = amount
-    const finalAmount = (amount * (1.0 + interestRate/100.0)) + (monthlySavings * 12)
+    const finalAmount = (amount * (1.0 + growthRate/100.0)) + (monthlyContribution * 12)
     amount = finalAmount
 
     return {
@@ -46,10 +46,10 @@ function createLifePlan(lifePlan: LifePlan): LifeResult {
 
   return {
     ...lifePlan,
-    yearResults,
+    calculatedYearPlans,
     finalAmount: amount
   }
 }
 
-export { createLifePlan }
-export type { LifeResult }
+export { calculateLifePlan }
+export type { LifePlan, CalculatedLifePlan }
