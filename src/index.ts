@@ -7,6 +7,7 @@ const lifePlan = createLifePlan({
   initialAmount: 20000,
   monthlySavings: 2000,
   interestRate: 6.0,
+  startYear: 2024,
   years: 20
 })
 

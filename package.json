@@ -7,7 +7,7 @@
     "compile": "tsc src/**.ts",
     "bundle": "esbuild src/index.js --bundle --outfile=out/bundle.js --format=iife --global-name=HFP",
     "build": "npm run compile && npm run bundle",
-    "run": "ts-node src/run.ts",
+    "dev": "tsc -w src/**.ts & esbuild src/index.js --bundle --outfile=out/bundle.js --format=iife --global-name=HFP --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.7",
-    "esbuild": "^0.17.15",
-    "ts-node": "^10.9.1"
+    "esbuild": "^0.17.15"
   }
 }
