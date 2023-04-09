@@ -1,13 +1,11 @@
 import { LifePlan } from "./calculator"
 
-function onLifePlanSubmit(form: HTMLFormElement, callback: (lifePlan: LifePlan) => void): void {
-  form?.addEventListener("submit", event => {
-    event.preventDefault()
-
-    const initialAmount = numberFromInputName(form, "initialAmount")
-    const monthlyContribution = numberFromInputName(form, "monthlyContribution")
-    const years = numberFromInputName(form, "years")
-    const growthRate = numberFromInputName(form, "growthRate")
+function onLifePlanUpdate(form: HTMLFormElement, callback: (lifePlan: LifePlan) => void): void {
+  const checkLifePlan = () => {
+    const initialAmount = numberFromInputSelector(form, "#initial-amount")
+    const monthlyContribution = numberFromInputSelector(form, "#monthly-contribution")
+    const years = numberFromInputSelector(form, "#years")
+    const growthRate = numberFromInputSelector(form, "#growth-rate")
 
     console.log(initialAmount, monthlyContribution, years, growthRate)
 
@@ -18,15 +16,19 @@ function onLifePlanSubmit(form: HTMLFormElement, callback: (lifePlan: LifePlan) 
       }
       callback(lifePlan)
     }
+  }
+  form.querySelectorAll<HTMLInputElement>("input").forEach(input => {
+    input.addEventListener("blur", checkLifePlan)
   })
+  checkLifePlan()
 }
 
 function nextYear(): number {
   return new Date().getFullYear() + 1
 }
 
-function numberFromInputName(form: HTMLFormElement, inputName: string): number | null {
-  const input = form.querySelector<HTMLInputElement>(`input[name="${inputName}"]`)
+function numberFromInputSelector(form: HTMLFormElement, selector: string): number | null {
+  const input = form.querySelector<HTMLInputElement>(selector)
   return input ? numberFromInput(input) : null
 }
 
@@ -76,4 +78,4 @@ function formatPercentageInput(input: HTMLInputElement): void {
   blur()
 }
 
-export { onLifePlanSubmit, formatCurrencyInput, formatPercentageInput }
+export { onLifePlanUpdate, formatCurrencyInput, formatPercentageInput }

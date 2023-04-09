@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc src/**.ts",
-    "bundle": "esbuild src/index.js --bundle --outfile=out/bundle.js --format=iife --global-name=HFP",
+    "bundle": "esbuild src/index.js --bundle --outfile=dist/bundle.js --format=iife --global-name=HFP",
     "build": "npm run compile && npm run bundle",
-    "dev": "tsc -w src/**.ts & esbuild src/index.js --bundle --outfile=out/bundle.js --format=iife --global-name=HFP --watch",
+    "dev": "tsc -w src/**.ts & esbuild src/index.js --bundle --outfile=dist/bundle.js --format=iife --global-name=HFP --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

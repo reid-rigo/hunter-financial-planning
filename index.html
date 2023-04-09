@@ -2,35 +2,30 @@
 
 <head>
   <title>HFP Calculator</title>
-  <link rel="stylesheet" href="hfp.css">
 </head>
 
 <body>
   <form action="">
     <div>
       <label for="initialAmount">Initial investment</label>
-      <input type="text" data-currency name="initialAmount" />
+      <input type="text" class="currency-input" id="initial-amount" />
     </div>
 
     <div>
       <label for="monthlyContribution">Monthly contribution</label>
-      <input type="text" data-currency name="monthlyContribution" />
+      <input type="text" class="currency-input" id="monthly-contribution" />
     </div>
 
     <div>
       <label for="years">Length of time in years</label>
-      <input type="text" name="years" />
+      <input type="text" id="years" />
     </div>
 
     <div>
       <label for="growthRate">Growth rate</label>
-      <input type="text" data-percentage name="growthRate" />
-    </div>
-
-    <div>
-      <button type="submit">Calculate</button>
+      <input type="text" class="percentage-input" id="growth-rate" />
     </div>
   </form>
   <canvas id="chart"></canvas>
-  <script src="out/bundle.js"></script>
+  <script src="dist/bundle.js"></script>
 </body>
