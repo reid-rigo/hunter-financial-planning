@@ -16,7 +16,6 @@ function onLifePlanSubmit(form: HTMLFormElement, callback: (lifePlan: LifePlan) 
         initialAmount, monthlyContribution, years, growthRate,
         startYear: nextYear()
       }
-      console.log(lifePlan)
       callback(lifePlan)
     }
   })
@@ -32,7 +31,7 @@ function numberFromInputName(form: HTMLFormElement, inputName: string): number |
 }
 
 function numberFromInput(input: HTMLInputElement): number | null {
-  return Number(input.value.replace(/[^0-9.,-]+/g,""))
+  return Number(input.value.replace(/[^0-9.-]+/g,""))
 }
 
 function formatCurrencyInput(input: HTMLInputElement): void {
