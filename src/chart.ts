@@ -14,11 +14,11 @@ function chartLifePlan(canvas: HTMLCanvasElement, lifeResult: CalculatedLifePlan
       datasets: [{
         label: "Contributions",
         data: contributionYears,
-        borderColor: "#6dbebf"
+        borderColor: "rgb(109, 190, 191)"
       }, {
         label: "Retirement Total",
         data: investmentYears,
-        borderColor: "#57a0e5"
+        borderColor: "rgb(87, 160, 229)"
       }]
     },
     options: {

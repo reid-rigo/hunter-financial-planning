@@ -14515,11 +14515,11 @@ var HFP = (() => {
         datasets: [{
           label: "Contributions",
           data: contributionYears,
-          borderColor: "#6dbebf"
+          borderColor: "rgb(109, 190, 191)"
         }, {
           label: "Retirement Total",
           data: investmentYears,
-          borderColor: "#57a0e5"
+          borderColor: "rgb(87, 160, 229)"
         }]
       },
       options: {
@@ -14558,7 +14558,7 @@ var HFP = (() => {
   });
   function onLifePlanUpdate(form, callback2) {
     const checkLifePlan = () => {
-      const initialAmount = numberFromInputSelector(form, "#initial-amount");
+      const initialAmount = numberFromInputSelector(form, "#initial-investment");
       const monthlyContribution = numberFromInputSelector(form, "#monthly-contribution");
       const years = numberFromInputSelector(form, "#years");
       const growthRate = numberFromInputSelector(form, "#growth-rate");
@@ -14636,21 +14636,31 @@ var HFP = (() => {
       var calculator_1 = (init_calculator(), __toCommonJS(calculator_exports));
       var chart_1 = (init_chart2(), __toCommonJS(chart_exports));
       var form_1 = (init_form(), __toCommonJS(form_exports));
-      var form = document.querySelector("form");
-      var canvas = document.querySelector("canvas#chart");
-      var currentChart;
-      if (form) {
-        form.querySelectorAll(".currency-input").forEach(function(input) {
-          return (0, form_1.formatCurrencyInput)(input);
-        });
-        form.querySelectorAll("percentage.input").forEach(function(input) {
-          return (0, form_1.formatPercentageInput)(input);
-        });
-        (0, form_1.onLifePlanUpdate)(form, function(lifePlan) {
-          var calculatedLifePlan = (0, calculator_1.calculateLifePlan)(lifePlan);
-          currentChart === null || currentChart === void 0 ? void 0 : currentChart.destroy();
-          currentChart = (0, chart_1.chartLifePlan)(canvas, calculatedLifePlan);
-        });
+      function findForm() {
+        var _a;
+        return ((_a = document.querySelector("#initial-investment")) === null || _a === void 0 ? void 0 : _a.form) || null;
+      }
+      function setup() {
+        var form = findForm();
+        var canvas = document.querySelector("canvas#chart");
+        var currentChart;
+        if (form) {
+          form.querySelectorAll(".currency-input").forEach(function(input) {
+            return (0, form_1.formatCurrencyInput)(input);
+          });
+          form.querySelectorAll("percentage.input").forEach(function(input) {
+            return (0, form_1.formatPercentageInput)(input);
+          });
+          (0, form_1.onLifePlanUpdate)(form, function(lifePlan) {
+            var calculatedLifePlan = (0, calculator_1.calculateLifePlan)(lifePlan);
+            currentChart === null || currentChart === void 0 ? void 0 : currentChart.destroy();
+            currentChart = (0, chart_1.chartLifePlan)(canvas, calculatedLifePlan);
+          });
+          console.log("Set up calculator", form);
+        }
+      }
+      if (findForm()) {
+        setup();
       }
     }
   });

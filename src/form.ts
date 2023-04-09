@@ -2,7 +2,7 @@ import { LifePlan } from "./calculator"
 
 function onLifePlanUpdate(form: HTMLFormElement, callback: (lifePlan: LifePlan) => void): void {
   const checkLifePlan = () => {
-    const initialAmount = numberFromInputSelector(form, "#initial-amount")
+    const initialAmount = numberFromInputSelector(form, "#initial-investment")
     const monthlyContribution = numberFromInputSelector(form, "#monthly-contribution")
     const years = numberFromInputSelector(form, "#years")
     const growthRate = numberFromInputSelector(form, "#growth-rate")
