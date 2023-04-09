@@ -13,7 +13,7 @@ type YearResult = YearPlan & {
 
 type LifePlan = {
   initialAmount: number,
-  monthlySavings: number,
+  monthlyContribution: number,
   interestRate: number,
   startYear: number,
   years: number,
@@ -25,7 +25,7 @@ type LifeResult = LifePlan & {
 }
 
 function createLifePlan(lifePlan: LifePlan): LifeResult {
-  const { initialAmount, monthlySavings, interestRate, startYear, years } = lifePlan
+  const { initialAmount, monthlyContribution: monthlySavings, interestRate, startYear, years } = lifePlan
   const yearPlans = times(years + 1, y => {
     return { monthlySavings, interestRate, year: startYear + y }
   })
